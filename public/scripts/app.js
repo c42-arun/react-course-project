@@ -1,67 +1,54 @@
-'use strict';
+"use strict";
 
-console.log('App.js is running!');
+// ES 5 style function def in object
+// const multiplier = {
+//     numbers: [1,2,3,4,5],
+//     multiplyBy: 2,
+//     multiply: function() {
+//         return this.numbers.map(n => n * this.multiplyBy);
+//     }
+// }
 
-var app = {
-  title: 'Indecision App',
-  subtitle: 'Put your life in the hands of a computer'
-};
-var template = React.createElement(
-  'div',
-  null,
-  React.createElement(
-    'h1',
-    null,
-    app.title
-  ),
-  React.createElement(
-    'p',
-    null,
-    app.subtitle
-  ),
-  React.createElement(
-    'ol',
-    null,
-    React.createElement(
-      'li',
-      null,
-      'Item one'
-    ),
-    React.createElement(
-      'li',
-      null,
-      'Item two'
-    )
-  )
-);
+// ES6 style function def in object
+// ES5 style function body
+const multiplier = {
+    numbers: [1,2,3,4,5],
+    multiplyBy: 2,
+    //multiply: () => this.numbers.map(num => num * this.multiplyBy)
+    multiply() {
+        return this.numbers.map(n => n * this.multiplyBy);
+    }
+}
 
-var user = {
-  name: 'Andrew',
-  age: 26,
-  location: 'Philadelphia'
-};
-var templateTwo = React.createElement(
-  'div',
-  null,
-  React.createElement(
-    'h1',
-    null,
-    user.name
-  ),
-  React.createElement(
-    'p',
-    null,
-    'Age: ',
-    user.age
-  ),
-  React.createElement(
-    'p',
-    null,
-    'Location: ',
-    user.location
-  )
-);
+// console.log(multiplier.multiply());
 
-var appRoot = document.getElementById('app');
 
-ReactDOM.render(template, appRoot);
+// const user = {
+//     name: 'Rishi',
+//     cities: ['London', 'New York', 'Bangalore'],
+//     printLivedIn: function() {
+//         console.log(this.name); // 'this' refers to the object the function bound to (which is the user)
+//         console.log(this.cities);
+
+//         // ERROR!
+//         this.cities.forEach(function(city) {
+//             console.log(this.name + ' lived in ' + city); // the function is bound to nothing, so 'this' is 'undefined'
+//         })
+//     }
+// }
+
+const user = {
+    name: 'Rishi',
+    cities: ['London', 'New York', 'Bangalore'],
+    printLivedIn: function() {
+        console.log(this.name); // 'this' refers to the object the function bound to (which is the user)
+        console.log(this.cities);
+
+        // SUCCESS!
+        this.cities.forEach(city => {
+            console.log(this.name + ' lived in ' + city); // the arrow function captures the context where it was created (user), so 'this' would refer to user
+        })
+    }
+}
+
+console.log(user.printLivedIn());
