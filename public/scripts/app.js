@@ -1,54 +1,84 @@
-"use strict";
+'use strict';
 
-// ES 5 style function def in object
-// const multiplier = {
-//     numbers: [1,2,3,4,5],
-//     multiplyBy: 2,
-//     multiply: function() {
-//         return this.numbers.map(n => n * this.multiplyBy);
-//     }
-// }
+console.log('App.js is running!');
 
-// ES6 style function def in object
-// ES5 style function body
-const multiplier = {
-    numbers: [1,2,3,4,5],
-    multiplyBy: 2,
-    //multiply: () => this.numbers.map(num => num * this.multiplyBy)
-    multiply() {
-        return this.numbers.map(n => n * this.multiplyBy);
-    }
-}
+// Challenge:
+// only render subtitle (and p tag) if subtitle exists - logical AND
+// render new p tag - if options.length > 0 print "Here are your options", otherwise "No options"
 
-// console.log(multiplier.multiply());
+var app = {
+  title: 'Indecision App',
+  subtitle: 'Put your life in the hands of a computer',
+  options: ['One', 'Two']
+};
 
+var template = React.createElement(
+  'div',
+  null,
+  React.createElement(
+    'h1',
+    null,
+    app.title
+  ),
+  app.subtitle && React.createElement(
+    'p',
+    null,
+    app.subtitle
+  ),
+  app.options && app.options.length > 0 ? "Here are your options" : "No options",
+  React.createElement(
+    'ol',
+    null,
+    React.createElement(
+      'li',
+      null,
+      'Item one'
+    ),
+    React.createElement(
+      'li',
+      null,
+      'Item two'
+    )
+  )
+);
 
-// const user = {
-//     name: 'Rishi',
-//     cities: ['London', 'New York', 'Bangalore'],
-//     printLivedIn: function() {
-//         console.log(this.name); // 'this' refers to the object the function bound to (which is the user)
-//         console.log(this.cities);
+var counter = 0;
+var addOne = function addOne() {
+  return console.log('addOne');
+};
+var minusOne = function minusOne() {
+  return console.log('minusOne');
+};
+var reset = function reset() {
+  return console.log('reset');
+};
 
-//         // ERROR!
-//         this.cities.forEach(function(city) {
-//             console.log(this.name + ' lived in ' + city); // the function is bound to nothing, so 'this' is 'undefined'
-//         })
-//     }
-// }
+var templateTwo = React.createElement(
+  'div',
+  null,
+  React.createElement(
+    'h1',
+    null,
+    'Count: ',
+    counter
+  ),
+  React.createElement(
+    'button',
+    { onClick: addOne },
+    '+1'
+  ),
+  React.createElement(
+    'button',
+    { onClick: minusOne },
+    '-1'
+  ),
+  React.createElement(
+    'button',
+    { onClick: reset },
+    'Reset'
+  )
+);
 
-const user = {
-    name: 'Rishi',
-    cities: ['London', 'New York', 'Bangalore'],
-    printLivedIn: function() {
-        console.log(this.name); // 'this' refers to the object the function bound to (which is the user)
-        console.log(this.cities);
+var appRoot = document.getElementById('app');
 
-        // SUCCESS!
-        this.cities.forEach(city => {
-            console.log(this.name + ' lived in ' + city); // the arrow function captures the context where it was created (user), so 'this' would refer to user
-        })
-    }
-}
-
-console.log(user.printLivedIn());
+ReactDOM.render(templateTwo, appRoot);
