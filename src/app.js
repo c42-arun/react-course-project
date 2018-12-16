@@ -28,6 +28,11 @@ const onFormSubmit = (e) => {
 };
 
 // const numbers = [5, 67, 700];
+const onMakeDecision = () => {
+  const random = Math.floor(Math.random() * app.options.length);
+  const randomOption = app.options[random];
+  alert(randomOption);
+};
 
 const render = () => {
   const template = (
@@ -35,14 +40,8 @@ const render = () => {
       <h1>{app.title}</h1>
       {app.subtitle && <p>{app.subtitle}</p>}
       {(app.options && app.options.length > 0) ? "Here are your options" : "No options"}
-      <p>{app.options.length}</p>
+      <button onClick={onMakeDecision}>What should I do?</button>
       <button onClick={onRemoveAll}>Remove All</button>
-      {/* {[<p>a</p>, <p>b</p>, <p>c</p>]} */}
-      {/* {
-        numbers.map(number => {
-          return <p key={number}>Number: {number}</p>
-        })
-      } */}
       <ol>
         {
           app.options.map(option => {
