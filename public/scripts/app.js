@@ -49,41 +49,50 @@ var counter = 0;
 // Updating the variable alone isn't enough - we need to recomple the template + re-render 
 var addOne = function addOne() {
   counter++;
-  console.log('addOne :' + counter);
+  console.log('addOne:' + counter);
+  renderCounterApp();
 };
 var minusOne = function minusOne() {
-  return console.log('minusOne');
+  counter--;
+  console.log('minusOne:' + counter);
+  renderCounterApp();
 };
 var reset = function reset() {
-  return console.log('reset');
+  counter = 0;
+  console.log('reset:' + counter);
+  renderCounterApp();
 };
-
-var templateTwo = React.createElement(
-  'div',
-  null,
-  React.createElement(
-    'h1',
-    null,
-    'Count: ',
-    counter
-  ),
-  React.createElement(
-    'button',
-    { onClick: addOne },
-    '+1'
-  ),
-  React.createElement(
-    'button',
-    { onClick: minusOne },
-    '-1'
-  ),
-  React.createElement(
-    'button',
-    { onClick: reset },
-    'Reset'
-  )
-);
 
 var appRoot = document.getElementById('app');
 
-ReactDOM.render(templateTwo, appRoot);
+var renderCounterApp = function renderCounterApp() {
+  var templateTwo = React.createElement(
+    'div',
+    null,
+    React.createElement(
+      'h1',
+      null,
+      'Count: ',
+      counter
+    ),
+    React.createElement(
+      'button',
+      { onClick: addOne },
+      '+1'
+    ),
+    React.createElement(
+      'button',
+      { onClick: minusOne },
+      '-1'
+    ),
+    React.createElement(
+      'button',
+      { onClick: reset },
+      'Reset'
+    )
+  );
+
+  ReactDOM.render(templateTwo, appRoot);
+};
+
+renderCounterApp();
