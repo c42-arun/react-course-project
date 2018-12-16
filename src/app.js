@@ -23,7 +23,14 @@ const template = (
 );
 
 let counter = 0;
-const addOne = () => console.log('addOne');
+// console would show counter incrementing but <h1> below doesn't change
+// This is because React compiles the template resolving expressions (variables & functions)
+// and renders it to the DOM
+// Updating the variable alone isn't enough - we need to recomple the template + re-render 
+const addOne = () => {
+  counter++;
+  console.log('addOne :' + counter);
+}
 const minusOne = () => console.log('minusOne');
 const reset = () => console.log('reset');
 
