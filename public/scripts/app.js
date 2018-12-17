@@ -106,15 +106,21 @@ var Options = function (_React$Component4) {
   }
 
   _createClass(Options, [{
+    key: 'handleRemoveAll',
+    value: function handleRemoveAll() {
+      // alert('handleRemoveAll');
+      console.log(this.props.options);
+    }
+  }, {
     key: 'render',
     value: function render() {
       return React.createElement(
         'div',
         null,
         React.createElement(
-          'p',
-          null,
-          'Options component here'
+          'button',
+          { onClick: this.handleRemoveAll.bind(this) },
+          'Remove All'
         ),
         this.props.options.map(function (option) {
           return React.createElement(Option, { key: option, optionText: option });
