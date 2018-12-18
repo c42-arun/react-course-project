@@ -19,23 +19,41 @@ var Counter = function (_React$Component) {
         _this.handleAddOne = _this.handleAddOne.bind(_this);
         _this.handleMinusOne = _this.handleMinusOne.bind(_this);
         _this.handleReset = _this.handleReset.bind(_this);
+
+        // initialize internal component state object
+        _this.state = {
+            counter: 0
+        };
         return _this;
     }
 
     _createClass(Counter, [{
         key: 'handleAddOne',
         value: function handleAddOne() {
-            alert('handleAddOne');
+            // setState updates state with new values and automatically refreshes DOM
+            this.setState(function (prevState) {
+                return {
+                    counter: prevState.counter + 1
+                };
+            });
         }
     }, {
         key: 'handleMinusOne',
         value: function handleMinusOne() {
-            alert('handleMinusOne');
+            this.setState(function (prevState) {
+                return {
+                    counter: prevState.counter - 1
+                };
+            });
         }
     }, {
         key: 'handleReset',
         value: function handleReset() {
-            alert('handleReset');
+            this.setState(function () {
+                return {
+                    counter: 0
+                };
+            });
         }
     }, {
         key: 'render',
@@ -46,7 +64,8 @@ var Counter = function (_React$Component) {
                 React.createElement(
                     'h1',
                     null,
-                    'Counter: '
+                    'Counter: ',
+                    this.state.counter
                 ),
                 React.createElement(
                     'button',
