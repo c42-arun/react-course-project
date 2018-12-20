@@ -14,11 +14,13 @@ class IndecisionApp extends React.Component {
   }
 
   handleRemoveAllOptions() {
-    this.setState(() => {
-      return {
-        options: []
-      }
-    });
+    // this.setState(() => {
+    //   return {
+    //     options: []
+    //   }
+    // });
+
+    this.setState(() => ( {options: []} ));
   }
 
   handlePick() {

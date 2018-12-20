@@ -31,10 +31,14 @@ var IndecisionApp = function (_React$Component) {
   _createClass(IndecisionApp, [{
     key: 'handleRemoveAllOptions',
     value: function handleRemoveAllOptions() {
+      // this.setState(() => {
+      //   return {
+      //     options: []
+      //   }
+      // });
+
       this.setState(function () {
-        return {
-          options: []
-        };
+        return { options: [] };
       });
     }
   }, {
