@@ -8,7 +8,8 @@ class IndecisionApp extends React.Component {
 
     // initialize component state
     this.state = {
-      options: ['One', 'Dho', 'Tres']
+      options: ['One', 'Dho', 'Tres'],
+      error: ''
     }
   }
 
@@ -27,9 +28,21 @@ class IndecisionApp extends React.Component {
   }
 
   handleAddOption(option) {
+
+    if (this.state.options.indexOf(option) > -1) {
+      this.setState(() => {
+        return {
+          error: 'Item already exists'
+        }
+      });
+
+      return;
+    }
+
     this.setState(prevState => {
       return {
-        options: prevState.options.concat(option)
+        options: prevState.options.concat(option),
+        error: ''
       }
     });
   }  
@@ -45,7 +58,7 @@ class IndecisionApp extends React.Component {
         
         {/* When 'options' prop changes due to state.options array update, Options component is automatically re-rendered */}
         <Options options={this.state.options} handleRemoveAllOptions={this.handleRemoveAllOptions}/>        
-        <AddOption handleAddOption={this.handleAddOption}/>
+        <AddOption handleAddOption={this.handleAddOption} error={this.state.error}/>
       </div>
     );
   }
@@ -112,6 +125,7 @@ class AddOption extends React.Component {
   render() {
     return (
       <div>
+        {this.props.error && <div>{this.props.error}</div>}
         <form onSubmit={this.handleAddOption}>
           <input type="text" name="option" />
           <button>Add Option</button>

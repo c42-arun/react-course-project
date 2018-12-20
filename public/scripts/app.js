@@ -22,7 +22,8 @@ var IndecisionApp = function (_React$Component) {
 
     // initialize component state
     _this.state = {
-      options: ['One', 'Dho', 'Tres']
+      options: ['One', 'Dho', 'Tres'],
+      error: ''
     };
     return _this;
   }
@@ -46,9 +47,21 @@ var IndecisionApp = function (_React$Component) {
   }, {
     key: 'handleAddOption',
     value: function handleAddOption(option) {
+
+      if (this.state.options.indexOf(option) > -1) {
+        this.setState(function () {
+          return {
+            error: 'Item already exists'
+          };
+        });
+
+        return;
+      }
+
       this.setState(function (prevState) {
         return {
-          options: prevState.options.concat(option)
+          options: prevState.options.concat(option),
+          error: ''
         };
       });
     }
@@ -64,7 +77,7 @@ var IndecisionApp = function (_React$Component) {
         React.createElement(Header, { title: title, subtitle: subtitle }),
         React.createElement(Action, { hasOptions: this.state.options.length > 0, handlePick: this.handlePick }),
         React.createElement(Options, { options: this.state.options, handleRemoveAllOptions: this.handleRemoveAllOptions }),
-        React.createElement(AddOption, { handleAddOption: this.handleAddOption })
+        React.createElement(AddOption, { handleAddOption: this.handleAddOption, error: this.state.error })
       );
     }
   }]);
@@ -214,6 +227,11 @@ var AddOption = function (_React$Component6) {
       return React.createElement(
         'div',
         null,
+        this.props.error && React.createElement(
+          'div',
+          null,
+          this.props.error
+        ),
         React.createElement(
           'form',
           { onSubmit: this.handleAddOption },
