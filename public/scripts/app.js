@@ -22,8 +22,7 @@ var IndecisionApp = function (_React$Component) {
 
     // initialize component state
     _this.state = {
-      options: ['One', 'Dho', 'Tres'],
-      error: ''
+      options: ['One', 'Dho', 'Tres']
     };
     return _this;
   }
@@ -53,20 +52,17 @@ var IndecisionApp = function (_React$Component) {
     value: function handleAddOption(option) {
 
       if (this.state.options.indexOf(option) > -1) {
-        this.setState(function () {
-          return {
-            error: 'Item already exists'
-          };
-        });
-
-        return;
+        return 'Item already exists';
       }
 
+      // this.setState(prevState => {
+      //   return {
+      //     options: prevState.options.concat(option)
+      //   }
+      // });
+
       this.setState(function (prevState) {
-        return {
-          options: prevState.options.concat(option),
-          error: ''
-        };
+        return { options: prevState.options.concat(option) };
       });
     }
   }, {
@@ -212,6 +208,10 @@ var AddOption = function (_React$Component6) {
 
     var _this6 = _possibleConstructorReturn(this, (AddOption.__proto__ || Object.getPrototypeOf(AddOption)).call(this, props));
 
+    _this6.state = {
+      error: undefined
+    };
+
     _this6.handleAddOption = _this6.handleAddOption.bind(_this6);
     return _this6;
   }
@@ -222,7 +222,11 @@ var AddOption = function (_React$Component6) {
       e.preventDefault();
       var option = e.target.elements.option.value.trim();
       if (option) {
-        this.props.handleAddOption(option);
+        var error = this.props.handleAddOption(option);
+
+        this.setState(function () {
+          return { error: error };
+        });
       }
     }
   }, {
@@ -231,10 +235,10 @@ var AddOption = function (_React$Component6) {
       return React.createElement(
         'div',
         null,
-        this.props.error && React.createElement(
+        this.state.error && React.createElement(
           'div',
           null,
-          this.props.error
+          this.state.error
         ),
         React.createElement(
           'form',
