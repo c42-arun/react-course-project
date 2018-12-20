@@ -4,6 +4,7 @@ class IndecisionApp extends React.Component {
 
     this.handleRemoveAllOptions = this.handleRemoveAllOptions.bind(this);
     this.handlePick = this.handlePick.bind(this);
+    this.handleAddOption = this.handleAddOption.bind(this);
 
     // initialize component state
     this.state = {
@@ -22,8 +23,16 @@ class IndecisionApp extends React.Component {
   handlePick() {
     const random = Math.floor(Math.random() * this.state.options.length);
     const randomOption = this.state.options[random];
-    alert(randomOption);
+    console.log(randomOption);
   }
+
+  handleAddOption(option) {
+    this.setState(prevState => {
+      return {
+        options: prevState.options.concat(option)
+      }
+    });
+  }  
 
   render() {
     const title = 'Indecision App';
@@ -33,8 +42,10 @@ class IndecisionApp extends React.Component {
       <div>
         <Header title={title} subtitle={subtitle}/>
         <Action hasOptions={this.state.options.length > 0} handlePick={this.handlePick}/>
-        <Options options={this.state.options} handleRemoveAllOptions={this.handleRemoveAllOptions}/>
-        <AddOption />
+        
+        {/* When 'options' prop changes due to state.options array update, Options component is automatically re-rendered */}
+        <Options options={this.state.options} handleRemoveAllOptions={this.handleRemoveAllOptions}/>        
+        <AddOption handleAddOption={this.handleAddOption}/>
       </div>
     );
   }
@@ -85,11 +96,16 @@ class Option extends React.Component {
 }
 
 class AddOption extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.handleAddOption = this.handleAddOption.bind(this);
+  }
   handleAddOption(e) {
     e.preventDefault();
     const option = e.target.elements.option.value.trim();
     if (option) {
-      alert(option);
+      this.props.handleAddOption(option);
     }
   }
 
