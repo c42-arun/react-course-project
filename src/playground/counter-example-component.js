@@ -8,7 +8,7 @@ class Counter extends React.Component {
 
         // initialize internal component state object
         this.state = {
-            counter: 0
+            counter: props.counter
         };
     }
 
@@ -47,6 +47,10 @@ class Counter extends React.Component {
             </div>
         );
     }
+}
+
+Counter.defaultProps = {
+    counter: 10
 }
 
 ReactDOM.render(<Counter />, document.getElementById('app'));
