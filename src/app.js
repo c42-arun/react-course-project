@@ -9,8 +9,31 @@ class IndecisionApp extends React.Component {
 
     // initialize component state
     this.state = {
-      options: ['One', 'Dho', 'Tres']
+      options: []
     }
+
+    this.loadData();
+  }
+
+  loadData() {
+    try {
+      const cachedOptions = JSON.parse(localStorage.getItem('options'));
+      this.state.options = cachedOptions;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    console.log('prevstate', prevState);
+    console.log('this.state', this.state);
+    if (prevState.options.length !== this.state.options.length) {
+      localStorage.setItem('options', JSON.stringify(this.state.options));
+    }
+  }
+
+  componentWillUnmount() {
+    console.log('cwu');
   }
 
   handleRemoveAllOptions() {
@@ -58,7 +81,7 @@ class IndecisionApp extends React.Component {
         <Action hasOptions={this.state.options.length > 0} handlePick={this.handlePick} />
 
         <Options options={this.state.options} handleRemoveAllOptions={this.handleRemoveAllOptions} handleRemoveOption={this.handleRemoveOption}/>
-        <AddOption handleAddOption={this.handleAddOption} error={this.state.error} />
+        <AddOption handleAddOption={this.handleAddOption} />
       </div>
     );
   }
