@@ -23,12 +23,40 @@ var IndecisionApp = function (_React$Component) {
 
     // initialize component state
     _this.state = {
-      options: ['One', 'Dho', 'Tres']
+      options: []
     };
+
+    _this.loadData();
     return _this;
   }
 
   _createClass(IndecisionApp, [{
+    key: 'loadData',
+    value: function loadData() {
+      try {
+        var cachedOptions = localStorage.getItem('options');
+        if (cachedOptions) {
+          this.state.options = JSON.parse(cachedOptions);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  }, {
+    key: 'componentDidUpdate',
+    value: function componentDidUpdate(prevProps, prevState) {
+      console.log('prevstate', prevState);
+      console.log('this.state', this.state);
+      if (prevState.options.length !== this.state.options.length) {
+        localStorage.setItem('options', JSON.stringify(this.state.options));
+      }
+    }
+  }, {
+    key: 'componentWillUnmount',
+    value: function componentWillUnmount() {
+      console.log('cwu');
+    }
+  }, {
     key: 'handleRemoveAllOptions',
     value: function handleRemoveAllOptions() {
       // this.setState(() => {
@@ -87,7 +115,7 @@ var IndecisionApp = function (_React$Component) {
         React.createElement(Header, { title: title, subtitle: subtitle }),
         React.createElement(Action, { hasOptions: this.state.options.length > 0, handlePick: this.handlePick }),
         React.createElement(Options, { options: this.state.options, handleRemoveAllOptions: this.handleRemoveAllOptions, handleRemoveOption: this.handleRemoveOption }),
-        React.createElement(AddOption, { handleAddOption: this.handleAddOption, error: this.state.error })
+        React.createElement(AddOption, { handleAddOption: this.handleAddOption })
       );
     }
   }]);
@@ -229,6 +257,10 @@ var AddOption = function (_React$Component2) {
 
       if (option) {
         var error = this.props.handleAddOption(option);
+
+        if (!error) {
+          e.target.elements.option.value = '';
+        }
 
         this.setState(function () {
           return { error: error };

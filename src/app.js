@@ -17,8 +17,10 @@ class IndecisionApp extends React.Component {
 
   loadData() {
     try {
-      const cachedOptions = JSON.parse(localStorage.getItem('options'));
-      this.state.options = cachedOptions;
+      const cachedOptions = localStorage.getItem('options');
+      if (cachedOptions) {
+        this.state.options = JSON.parse(cachedOptions);
+      }
     } catch (error) {
       console.log(error);
     }
@@ -190,6 +192,10 @@ class AddOption extends React.Component {
     if (option) {
       const error = this.props.handleAddOption(option);
 
+      if (!error) {
+        e.target.elements.option.value = '';
+      }
+      
       this.setState(() => ({ error }));
     }
   }
