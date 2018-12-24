@@ -8,8 +8,27 @@ class Counter extends React.Component {
 
         // initialize internal component state object
         this.state = {
-            counter: props.counter
+            counter: 0
         };
+
+        this.loadData();
+    }
+
+    loadData() {
+        try {
+            const counter = Number.parseInt(localStorage.getItem('counter'));
+
+            if (!isNaN(counter)) {
+                this.state.counter = counter;
+            }
+
+        } catch (error) {
+            
+        }
+    }
+
+    componentDidUpdate() {
+        localStorage.setItem('counter', this.state.counter);
     }
 
     handleAddOne() {
@@ -47,10 +66,6 @@ class Counter extends React.Component {
             </div>
         );
     }
-}
-
-Counter.defaultProps = {
-    counter: 10
 }
 
 ReactDOM.render(<Counter />, document.getElementById('app'));
