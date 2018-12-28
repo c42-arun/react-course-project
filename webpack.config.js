@@ -11,6 +11,13 @@ module.exports = {
             loader: 'babel-loader',
             test: /\.js$/,
             exclude: /node_modules/
+        }, {
+            test: /\.css$/,
+            // 'use' to specify an array of loaders, whereas 'loader' for a single loader (as above for babel)
+            use: [
+                'style-loader',
+                'css-loader'
+            ]
         }]
     },
     devtool: 'cheap-module-eval-source-map',
