@@ -8,6 +8,8 @@ ReactDOM.render(<IndecisionApp />, document.getElementById('app'));
 class OldSyntax {
     constructor() {
         this.name = 'Arun';
+
+        // ES6/ES5 function syntax needs 'this' binding
         this.greeting = this.greeting.bind(this);
     }
 
@@ -25,6 +27,8 @@ myOldGreet();
 class NewSyntax {
     name = 'Rishi';
 
+    // ES6 property syntax with anon function automatically carries the parent context
+    // No extra bind step requried
     greeting = () => {
         console.log(`Hi from ${this.name}`);
     }
