@@ -1,18 +1,20 @@
 .header {
-    background: #20222b;
+    background: $off-black;
     color: white;
-    margin-bottom: 4.8rem; // 48px since font size in html is scaled down to 62.5% (see _base.scss)
-    padding: 1.6rem 0; // 16px for same reasons as above
+    margin-bottom: $xl-size; 
+    padding: $m-size 0;
 }
 
+// element in BEM 
+// naming convention: <block being modified>__<descriptive name> 
 .header__title {
-    font-size: 3.2rem; // 32px as above
+    font-size: $l-size;
     margin: 0;
 }
 
 .header__subtitle {
-    color: #a5afd7;
-    font-size: 1.6rem;
+    color: $off-white;
+    font-size: $m-size;
     font-weight: 500;
     margin: 0;
 }
