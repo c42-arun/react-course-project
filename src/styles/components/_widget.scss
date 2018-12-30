@@ -5,3 +5,7 @@
     justify-content: space-between; // all exra space to be distributed *between* elements
     padding: $m-size;
 }
+
+.widget-header__title {
+    margin: 0;
+}
