@@ -12,7 +12,16 @@ const Options = (props) => (
         Remove All
     </button>
     </div>
-    {props.options.map((option) => <Option key={option} optionText={option} handleRemoveOption={props.handleRemoveOption} />)}
+    {props.options.length === 0 && <p>Please add an option to get started!</p>}
+    {
+      props.options.map((option) => (
+        <Option
+          key={option}
+          optionText={option}
+          handleDeleteOption={props.handleDeleteOption}
+        />
+      ))
+    }
   </div>
 );
 
