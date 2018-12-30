@@ -12,7 +12,7 @@ module.exports = {
             test: /\.js$/,
             exclude: /node_modules/
         }, {
-            test: /\.scss$/,
+            test: /\.s?css$/,
             // 'use' to specify an array of loaders, whereas 'loader' for a single loader (as above for babel)
             use: [
                 'style-loader',
