@@ -8,6 +8,9 @@
 // here we set up a in-out transition for the opacity
 // So whenever opacity value is changed it is transitioned instead of being instant
 .ReactModalPortal .ReactModal__Overlay {
+    align-items: center;
+    display: flex;
+    justify-content: center;
     transition: opacity 200ms ease-in-out;
 }
 
@@ -26,4 +29,24 @@
 // 'closeTimeoutMS' prop on the React Modal component - see OptionModal.js
 .ReactModalPortal .ReactModal__Overlay--before-close {
     opacity: 0;
+}
+
+.modal {
+    background: $light-blue;
+    color: white;
+    max-width: 30rem;
+    outline: none;
+    padding: $l-size;
+    text-align: center;
+}
+
+.modal__title {
+    margin: 0 0 $l-size 0;
+}
+
+.modal__body {
+    font-size: 2rem;
+    font-weight: 300;
+    margin: 0 0 $l-size 0;
+    word-break: break-all;
 }
