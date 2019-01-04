@@ -1,0 +1,29 @@
+// when modal first opens the div inside does not have any CSS applied
+// so target that div and make it invisible
+.ReactModalPortal > div {
+    opacity: 0;
+}
+
+// this CSS gets applied right after but before actually loading the content
+// here we set up a in-out transition for the opacity
+// So whenever opacity value is changed it is transitioned instead of being instant
+.ReactModalPortal .ReactModal__Overlay {
+    transition: opacity 200ms ease-in-out;
+}
+
+// CSS is applied when the contents are loaded
+// the opacity is set to 1 (from being 0 previously)
+// it would be transitioned 0 -> 1 as we've set up the transition earlier
+.ReactModalPortal .ReactModal__Overlay--after-open {
+    opacity: 1;
+}
+
+// CSS is applied just before the contents are unloaded
+// the opacity is set to 0 (from being 1 previously)
+// it would be transitioned 1 -> 0 as we've set up the transition earlier
+// HOWEVER this alone isn't enough as when removing the div is yanked off the DOM
+// so this CSS never gets a chance to be applied. To delay the removal we need to set 
+// 'closeTimeoutMS' prop on the React Modal component - see OptionModal.js
+.ReactModalPortal .ReactModal__Overlay--before-close {
+    opacity: 0;
+}
