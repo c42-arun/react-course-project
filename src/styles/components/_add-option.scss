@@ -1,0 +1,26 @@
+.add-option-error {
+    font-style: italic;
+    color: $off-white;
+    margin: $m-size 0 0 0;
+    padding-left: $s-size;
+}
+
+.add-option {
+    display: flex;
+    padding: $m-size;
+    // margin: $m-size; // --> this wouldn't create the gap around the contents (i.e input & button)
+                        // as it creates the space outside the border which actually creates space on
+                        // the left & right (because of 'container' constraints?) but only on top 
+                        // not the bottom - perhaps it wants to keep content height unchanged?
+                        // So the correct approach is to use padding 
+}
+
+.add-option__input {
+    background: $dark-blue;
+    border: none;
+    border-bottom: .3rem solid darken($color: $dark-blue, $amount: 10%);
+    color: $off-white;
+    padding: $s-size;
+    flex-grow: 1;
+    margin-right: $s-size;
+}
